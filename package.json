@@ -19,6 +19,7 @@
     "url": "https://github.com/admittedly/connect-restful/issues"
   },
   "devDependencies": {
-    "mocha": "~2.2.5"
+    "mocha": "~2.2.5",
+    "must": "~0.12.0"
   }
 }

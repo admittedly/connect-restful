@@ -1,3 +1,5 @@
+var demand = require("must");
+
 describe("connect-restful", function(){
 	it("must require the module", function(){
 		var Restful = require("../");

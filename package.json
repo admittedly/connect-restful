@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha test"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,8 @@
   "license": "MIT License",
   "bugs": {
     "url": "https://github.com/admittedly/connect-restful/issues"
+  },
+  "devDependencies": {
+    "mocha": "~2.2.5"
   }
 }

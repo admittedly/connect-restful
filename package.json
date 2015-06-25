@@ -30,8 +30,8 @@
     "express": "~4.12.4"
   },
   "dependencies": {
-    "connect": "~3.3.5",
     "string": "~3.3.0",
-    "pluralize": "~1.1.2"
+    "pluralize": "~1.1.2",
+    "bluebird": "~2.9.30"
   }
 }

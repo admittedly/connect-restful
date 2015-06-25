@@ -3,22 +3,26 @@ var request = require("supertest");
 var express = require("express");
 
 var Restful = require("../");
+var Stub = require("../lib/express-restful-stub");
 
 describe("connect-restful", function(){
 	it("must require the module", function(){
 		Restful.must.exist();
 	});
 
-	it("must add all routes for resource", function(done){
+	it("must add index route for resource", function(done){
 		var app = express();
 
-		var restful = Restful(app);
+		var handler = Stub({User : {}});
 
-		restful.addResource("user");
+		var restful = Restful(app, handler);
 
-		app.use(function(req, res){
-			done();
+		app.use(function(req, res, next){
+			//Dummy middleware
+			next();
 		});
+
+		restful.addResource("user", "User");
 
 		app.use(function(err, req, res, next){
 			done(err);
@@ -27,6 +31,11 @@ describe("connect-restful", function(){
 		request(app)
 		.get("/users")
 		.expect(200)
-		.end(done);
+		.end(function(err, res){
+			if(!!err) console.error(err);
+			demand(err).not.exist();
+			res.body.must.be.an.array();
+			done();
+		});
 	});
 });

@@ -10,7 +10,7 @@ describe("connect-restful", function(){
 		Restful.must.exist();
 	});
 
-	it("must add index route for resource", function(done){
+	it("must add INDEX route for resource", function(done){
 		var app = express();
 
 		var handler = Stub({User : {}});
@@ -37,5 +37,46 @@ describe("connect-restful", function(){
 			res.body.must.be.an.array();
 			done();
 		});
+	});
+
+	it.skip("must add GET route for resource", function(done){
+		var app = express();
+
+		var handler = Stub({User : {}});
+
+		var restful = Restful(app, handler);
+
+		app.use(function(req, res, next){
+			//Dummy middleware
+			next();
+		});
+
+		restful.addResource("user", "User");
+
+		app.use(function(err, req, res, next){
+			done(err);
+		});
+
+		request(app)
+		.get("/users/1")
+		.expect(200)
+		.end(function(err, res){
+			if(!!err) console.error(err);
+			demand(err).not.exist();
+			res.body.must.be.an.object();
+			done();
+		});
+	});
+
+	it.skip("must add POST route for resource", function(done){
+
+	});
+
+	it.skip("must add PUT route for resource", function(done){
+
+	});
+
+	it.skip("must add DELETE route for resource", function(done){
+
 	});
 });
